@@ -21,7 +21,7 @@ def imshow(img):
 def lowPassFilter(lpfw, lpfh):
     print("Please create a (lpfw x lpfh) Low Pass Filter matrix")
     
-    lowPass = np.ones((lpfw,lpfh))*1/(lpfw*lpfh)
+    lowPass = np.ones((lpfw, lpfh))*1 / (lpfw * lpfh)
     
     print(lowPass)
     return lowPass
@@ -32,12 +32,12 @@ def lowPassFilter(lpfw, lpfh):
 def conv(image, filter):
     iw,ih = image.shape
     fw,fh = filter.shape    
-    out = np.zeros((iw-fw+1,ih-fh+1)) #it does not include the pixel on the boundary
+    out = np.zeros((iw - fw+1, ih - fh+1)) #it does not include the pixel on the boundary
     
     # please select fw x fh sub images in the image. Then, apply the filter on the sub images.
-    for u in range(ih-fh+1):
-        for v in range(iw-fw+1):
-            out[u,v] = np.sum(filter*image[u:u+fh , v:v+fw])
+    for u in range(ih - fh + 1):
+        for v in range(iw - fw + 1):
+            out[u, v] = np.sum(filter * image[u:u + fh , v:v + fw])
     out = np.resize(out, (out.shape[0], out.shape[1])).astype(np.uint8)
     
     # Return the resulting image "out"
